@@ -1,13 +1,7 @@
 .SUFFIXES: .F .f90 .c
 
-CPP = gcc -E -P -C $*.F >$*.f90
-FC  = gfortran
-CC  = gcc
+include arch.make
 
-CUDA_DIR =/usr/local/cuda
-
-CFLAGS  = -DFUDA_DEBUG -I$(CUDA_DIR)/include
-FFLAGS  = -ffree-form -g -O0 
 C_SRC   = fudadevice.c
 C_OBJ   = $(C_SRC:.c=.o)
 LIB     = fuda.a

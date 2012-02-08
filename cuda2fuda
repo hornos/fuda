@@ -19,7 +19,7 @@ function cuda2fuda/cudaError_enum() {
 
   echo "! Generated from: ${_h}" > "${_o}"
 
-  local _e="${FUNCNAME##define/}"
+  local _e="${FUNCNAME##cuda2fuda/}"
   cat "${_h}" | \
   awk -v e="${_e}" 'BEGIN{
     start=0;

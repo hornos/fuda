@@ -1,0 +1,7 @@
+CPP = gcc -E -P -C $*.F >$*.f90
+FC  = ifort
+CC  = icc
+
+CUDA_DIR = $(CUDA_HOME)
+CFLAGS   = -DFUDA_DEBUG -I$(CUDA_DIR)/include
+FFLAGS   = -FR -g -O0 
