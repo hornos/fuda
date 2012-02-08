@@ -5,7 +5,7 @@ include arch.make
 C_SRC   = fudadevice.c
 C_OBJ   = $(C_SRC:.c=.o)
 LIB     = fuda.a
-LDFLAGS = $(LIB) -L$(CUDA_DIR)/lib -lcudart
+LDFLAGS = $(LIB) -L$(CUDA_LIB) -lcudart
 
 F_SRC  = fudadevice.F
 F_MOD  = $(F_SRC:.F=.mod)
