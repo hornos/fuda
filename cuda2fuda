@@ -54,6 +54,6 @@ while getopts he o; do
 done
 
 ### main
-fi ${_e} ; then
+if ${_e} ; then
   cuda2fuda/cudaError_enum
 fi
