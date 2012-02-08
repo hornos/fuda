@@ -1,0 +1,10 @@
+.DS*
+*.old
+*.o
+*.s
+*.mod
+*.f90
+*.a
+test/*
+fuda
+cudaerror.h

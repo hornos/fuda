@@ -1,0 +1,59 @@
+#!/bin/bash
+
+if test "${OSTYPE##darwin}" = "${OSTYPE}" ; then
+  # linux
+  _cuda_home="${CUDA_HOME:-/opt/cuda}"
+else
+  # osx
+  _cuda_home="${CUDA_HOME:-/usr/local/cuda}"
+fi
+
+function cuda2fuda/cudaError_enum() {
+  local _h="${1:-${_cuda_home}/include/cuda.h}"
+  local _o="${2:-cudaerror.h}"
+
+  if ! test -r "${_h}" ; then
+    echo "Not found: ${_h}"
+    return 1
+  fi
+
+  echo "! Generated from: ${_h}" > "${_o}"
+
+  local _e="${FUNCNAME##define/}"
+  cat "${_h}" | \
+  awk -v e="${_e}" 'BEGIN{
+    start=0;
+    m=sprintf("typedef enum %s",e);
+  }
+  {
+    if(match($0,m))
+      start=1;
+    if(start&&match($0,"} CUresult;"))
+      start=0;
+    if(start) {
+      if(match($0,"^ *CUDA_")) {
+        split($0,a,"=");
+        split(a[2],b,",")
+        print "#define" a[1] b[1];
+      }
+    }
+  }' >> "${_o}"
+}
+
+function help/cuda2fuda() {
+  exit 1
+}
+
+### args
+_e=false
+while getopts he o; do
+  case "$o" in
+    e) _e=true;;
+    h|*) help/cuda2fuda;;
+  esac
+done
+
+### main
+fi ${_e} ; then
+  cuda2fuda/cudaError_enum
+fi
