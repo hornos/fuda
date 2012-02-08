@@ -8,3 +8,5 @@
 test/*
 fuda
 cudaerror.h
+cudadevice.h
+arch.make

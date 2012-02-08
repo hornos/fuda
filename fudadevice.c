@@ -5,11 +5,16 @@
 #include <stdio.h>
 #include <driver_types.h>
 
-/*
- cudaError_t cudaChooseDevice (int device, const struct cudaDeviceProp prop)
- Select compute-device which best matches criteria.
-*/
-
+// cudaError_t cudaChooseDevice (int device, const struct cudaDeviceProp *prop)
+// Select compute-device which best matches criteria.
+extern cudaError_t cudaChooseDevice ( int *, const struct cudaDeviceProp * );
+void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ierr ) {
+  *ierr = cudaChooseDevice( device, prop );
+#ifdef FUDA_DEBUG
+  printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );
+  printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
+#endif
+}
 
 // cudaError_t cudaGetDevice (int *device)
 // Returns which device is currently being used.
@@ -34,12 +39,16 @@ void fudagetdevicecount_( int *count, int *ierr ) {
 #endif
 }
 
-
-/*
-    cudaError_t cudaGetDeviceProperties (struct cudaDeviceProp prop, int device)
-    Returns information about the compute-device.
-*/
-
+// cudaError_t cudaGetDeviceProperties (struct cudaDeviceProp *prop, int device)
+// Returns information about the compute-device.
+extern cudaError_t cudaGetDeviceProperties (struct cudaDeviceProp *, int);
+void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ierr ) {
+  *ierr = cudaGetDeviceProperties( prop, *device );
+#ifdef FUDA_DEBUG
+  printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );
+  printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
+#endif
+}
 
 // cudaError_t cudaSetDevice (int device)
 // Set device to be used for GPU executions.
@@ -66,14 +75,14 @@ void fudasetdeviceflags_( int *ags, int *ierr ) {
 // cudaError_t cudaSetValidDevices (int *device_arr, int len)
 // Set a list of devices that can be used for CUDA
 extern cudaError_t cudaSetValidDevices (int *, int);
-void fudasetvaliddevices_( int *device_arr, int len, int *ierr ) {
+void fudasetvaliddevices_( int *device_arr, int *len, int *ierr ) {
 #ifdef FUDA_DEBUG
   int i;
   printf("\n%s (%d) len = %d", __FILE__, __LINE__, len );
   printf("\n%s (%d) device_arr =", __FILE__, __LINE__ );
-  for( i = 0; i < len; i++ ) {
+  for( i = 0; i < *len; i++ ) {
     printf( " %d", device_arr[i] );
   }
 #endif
-  *ierr = cudaSetValidDevices( device_arr, len );
+  *ierr = cudaSetValidDevices( device_arr, *len );
 }
