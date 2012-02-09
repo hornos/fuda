@@ -2,12 +2,12 @@
 
 include arch.make
 
-C_SRC   = fudadevice.c
+C_SRC   = fudadevice.c fudaerror.c
 C_OBJ   = $(C_SRC:.c=.o)
 LIB     = fuda.a
 LDFLAGS = $(LIB) -L$(CUDA_LIB) -lcudart
 
-F_SRC  = fudadevice.F
+F_SRC  = $(C_SRC:.c=.F)
 F_MOD  = $(F_SRC:.F=.mod)
 
 all: $(LIB) fuda

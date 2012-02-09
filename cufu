@@ -1,0 +1,42 @@
+#!/bin/bash
+### bootstrap
+source ${SHF3_HOME:-${HOME}/shf3}/lib/header
+import gui
+import sys
+
+### cufu
+include ${gdn}/lib
+import ${gbn}/header
+
+### os detection
+_os=$(sys/os)
+if test "${_os}" = "linux" ; then
+  cufu_cuda_home="${CUDA_HOME:-/opt/cuda}"
+elif test "${_os}" = "osx" ; then
+  cufu_cuda_home="${CUDA_HOME:-/usr/local/cuda}"
+else
+  msg "OS not supported"
+  exit ${_false_}
+fi
+
+### help
+function help/cufu() {
+  echo "CUDA to Fortran Converter"
+  exit ${_false_}
+}
+
+### args
+while getopts h o; do
+  case "$o" in
+    h|*) help/cufu;;
+  esac
+done
+
+### main
+msg "CUDA 2 FORTRAN"
+gui/line
+action="header/cudaError_enum header/cudaDeviceProp"
+for i in ${action} ; do
+  msg "Action: ${i}"
+  cufu/${i}
+done

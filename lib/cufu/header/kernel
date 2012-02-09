@@ -1,15 +1,5 @@
-#!/bin/bash
-
-if test "${OSTYPE##darwin}" = "${OSTYPE}" ; then
-  # linux
-  _cuda_home="${CUDA_HOME:-/opt/cuda}"
-else
-  # osx
-  _cuda_home="${CUDA_HOME:-/usr/local/cuda}"
-fi
-
-function cuda2fuda/cudaError_enum() {
-  local _h="${1:-${_cuda_home}/include/cuda.h}"
+function cufu/header/cudaError_enum() {
+  local _h="${1:-${cufu_cuda_home}/include/cuda.h}"
   local _o="${2:-cudaerror.h}"
 
   if ! test -r "${_h}" ; then
@@ -19,7 +9,7 @@ function cuda2fuda/cudaError_enum() {
 
   echo "! Generated from: ${_h}" > "${_o}"
 
-  local _e="${FUNCNAME##cuda2fuda/}"
+  local _e=$(ns/func ${FUNCNAME})
   cat "${_h}" | \
   awk -v e="${_e}" 'BEGIN{
     start=0;
@@ -38,8 +28,8 @@ function cuda2fuda/cudaError_enum() {
   }' >> "${_o}"
 }
 
-function cuda2fuda/cudaDeviceProp() {
-  local _h="${1:-${_cuda_home}/include/driver_types.h}"
+function cufu/header/cudaDeviceProp() {
+  local _h="${1:-${cufu_cuda_home}/include/driver_types.h}"
   local _o="${2:-cudadevice.h}"
   local _ik=4
 
@@ -49,7 +39,7 @@ function cuda2fuda/cudaDeviceProp() {
   fi
 
   echo "! Generated from: ${_h}"  > "${_o}"
-  local _e="${FUNCNAME##cuda2fuda/}"
+  local _e=$(ns/func ${FUNCNAME})
 
   echo "type ${_e}"              >> "${_o}"
   cat "${_h}" | \
@@ -89,27 +79,3 @@ function cuda2fuda/cudaDeviceProp() {
   }' >> "${_o}"
   echo "end type ${_e}" >> "${_o}"
 }
-
-function help/cuda2fuda() {
-  exit 1
-}
-
-### args
-_e=false
-_d=false
-while getopts hed o; do
-  case "$o" in
-    e) _e=true;;
-    d) _d=true;;
-    h|*) help/cuda2fuda;;
-  esac
-done
-
-### main
-if ${_e} ; then
-  cuda2fuda/cudaError_enum
-fi
-
-if ${_d} ; then
-  cuda2fuda/cudaDeviceProp
-fi

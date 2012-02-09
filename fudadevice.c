@@ -63,8 +63,8 @@ void fudasetdevice_( int *device, int *ierr ) {
 
 // cudaError_t cudaSetDeviceFlags (unsigned int ags)
 // Sets ags to be used for device executions.
-extern cudaError_t cudaSetDeviceFlags (int);
-void fudasetdeviceflags_( int *ags, int *ierr ) {
+extern cudaError_t cudaSetDeviceFlags (unsigned int);
+void fudasetdeviceflags_( unsigned int *ags, int *ierr ) {
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ags = %d", __FILE__, __LINE__, *ags );
 #endif
