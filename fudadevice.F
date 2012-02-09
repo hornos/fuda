@@ -1,7 +1,5 @@
 #include "fudakind.h"
 
-! TODO: cudaDeviceProp format
-
 module fudadevice
   implicit none
 
@@ -26,7 +24,7 @@ module fudadevice
     end subroutine
 
 !   void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ierr )
-    subroutine fudaGetDeviceProperties(device,prop,ierr)
+    subroutine fudaGetDeviceProperties(prop,device,ierr)
       import cudaDeviceProp
       integer(kind=KIND_INT) :: device
       integer(kind=KIND_INT) :: ierr
@@ -52,4 +50,5 @@ module fudadevice
     end subroutine
 
   end interface
+
 end module fudadevice
