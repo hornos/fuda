@@ -48,7 +48,7 @@ function cufu/header/cudaDeviceProp() {
     m=sprintf("struct.*%s",e);
   }
   {
-    if(start&&match($0,"\}\;"))
+    if(start&&match($0,"};"))
       start=0;
     if(match($0,m))
       start=1;
@@ -72,8 +72,8 @@ function cufu/header/cudaDeviceProp() {
         }
         l=sprintf("%-32s :: %s",l,c[1]);
       }
-      sub("\\[","\(",l);
-      sub("\\]","\)",l);
+      sub("\\[","(",l);
+      sub("\\]",")",l);
       print "  " l;
     }
   }' >> "${_o}"
