@@ -3,14 +3,11 @@
 program fuda_test
   use fudaDevice
   implicit none
-  integer :: count,gpp,ierr
+  integer :: count,ierr
   integer :: device
   character(len=80) :: error
   type(cudaDeviceProp) :: prop
   print*,"Fuda test"
-
-  call fudaGetNumCards(gpp,ierr)
-  write(*,'("gpp = ",I5)'),gpp
 
   call fudaGetDeviceCount(count,ierr)
   if (ierr.ne.CUDA_SUCCESS) then

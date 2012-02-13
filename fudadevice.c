@@ -90,14 +90,3 @@ void fudasetvaliddevices_( int *device_arr, int *len, int *ierr ) {
   *ierr = cudaSetValidDevices( device_arr, *len );
 }
 
-
-// EXTENSIONS
-// environment GPU_NUM_CARDS
-// for MPI multi-GPU setup
-void fudagetnumcards_( int *count, int *ierr ) {
-  char *env;
-  *count = 0;
-  env = getenv( "GPU_NUM_CARDS" );
-  if( env != NULL )
-    *count = atoi( env );
-}

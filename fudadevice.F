@@ -49,11 +49,6 @@ module fudadevice
       integer(kind=KIND_INT) :: len, ierr
     end subroutine
 
-! EXTENSIONS
-!   void fudagetnumcards_( int *count, *ierr ) {
-    subroutine fudaGetNumCards(count,ierr)
-      integer(kind=KIND_INT) :: count, ierr
-    end subroutine
   end interface
 
 end module fudadevice
