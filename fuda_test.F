@@ -1,13 +1,16 @@
 #include "cudaerror.h"
 
-program fuda
+program fuda_test
   use fudaDevice
   implicit none
-  integer :: count,ierr
+  integer :: count,gpp,ierr
   integer :: device
   character(len=80) :: error
   type(cudaDeviceProp) :: prop
   print*,"Fuda test"
+
+  call fudaGetNumCards(gpp,ierr)
+  write(*,'("gpp = ",I5)'),gpp
 
   call fudaGetDeviceCount(count,ierr)
   if (ierr.ne.CUDA_SUCCESS) then
@@ -25,4 +28,4 @@ program fuda
   end if
   print*,prop%name
 
-end program fuda
+end program fuda_test

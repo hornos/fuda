@@ -3,7 +3,10 @@
 // CUDA Device Management
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <driver_types.h>
+
+// NVIDIA INTERFACE
 
 // cudaError_t cudaChooseDevice (int device, const struct cudaDeviceProp *prop)
 // Select compute-device which best matches criteria.
@@ -85,4 +88,16 @@ void fudasetvaliddevices_( int *device_arr, int *len, int *ierr ) {
   }
 #endif
   *ierr = cudaSetValidDevices( device_arr, *len );
+}
+
+
+// EXTENSIONS
+// environment GPU_NUM_CARDS
+// for MPI multi-GPU setup
+void fudagetnumcards_( int *count, int *ierr ) {
+  char *env;
+  *count = 0;
+  env = getenv( "GPU_NUM_CARDS" );
+  if( env != NULL )
+    *count = atoi( env );
 }

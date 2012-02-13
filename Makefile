@@ -10,13 +10,13 @@ LDFLAGS = $(LIB) -L$(CUDA_LIB) -lcudart
 F_SRC  = $(C_SRC:.c=.F)
 F_MOD  = $(F_SRC:.F=.mod)
 
-all: $(LIB) fuda
+all: $(LIB) fuda_test
 
 $(LIB): $(C_OBJ)
 	ar vq $(LIB) $(C_OBJ)
 
-fuda: $(F_MOD) fuda.o
-	$(FC) -o fuda fuda.o $(LDFLAGS)
+fuda_test: $(F_MOD) fuda_test.o
+	$(FC) -o fuda_test fuda_test.o $(LDFLAGS)
 
 .c.o:
 	@echo "\nC Object:" $@

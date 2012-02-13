@@ -5,8 +5,9 @@
 *.mod
 *.f90
 *.a
+fort.*
 test/*
-fuda
+fuda_test
 cudaerror.h
 cudadevice.h
 arch.make

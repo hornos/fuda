@@ -19,7 +19,7 @@ module fudadevice
     end subroutine
 
 !   void fudagetdevicecount_( int *count, int *ierr )
-    subroutine fudagetdevicecount(count,ierr)
+    subroutine fudaGetDeviceCount(count,ierr)
       integer(kind=KIND_INT) :: count,ierr
     end subroutine
 
@@ -49,6 +49,11 @@ module fudadevice
       integer(kind=KIND_INT) :: len, ierr
     end subroutine
 
+! EXTENSIONS
+!   void fudagetnumcards_( int *count, *ierr ) {
+    subroutine fudaGetNumCards(count,ierr)
+      integer(kind=KIND_INT) :: count, ierr
+    end subroutine
   end interface
 
 end module fudadevice
