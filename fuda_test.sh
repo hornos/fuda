@@ -11,6 +11,7 @@ if test "${OSTYPE##darwin}" = "${OSTYPE}" ; then
   LD_LIBRARY_PATH="${_cuda_home}/lib${_arch}"
 else
   # osx
+  _cuda_home=${CUDA_HOME:-/usr/local/cuda}
   DYLD_LIBRARY_PATH="${_cuda_home}/lib"
 fi
 
