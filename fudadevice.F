@@ -7,7 +7,7 @@ module fudadevice
 
   interface
 !   void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ierr )
-    subroutine fudaChooseDevice(device,prop,ierr) bind(c)
+    subroutine fudaChooseDevice(device,prop,ierr)
       use iso_c_binding
       import cudaDeviceProp
        integer(c_int) :: device,ierr
@@ -15,19 +15,19 @@ module fudadevice
     end subroutine
 
 !   void fudagetdevice_( int *device, int *ierr )
-    subroutine fudaGetDevice(device,ierr) bind(c)
+    subroutine fudaGetDevice(device,ierr)
       use iso_c_binding
       integer(c_int) :: device,ierr
     end subroutine
 
 !   void fudagetdevicecount_( int *count, int *ierr )
-    subroutine fudaGetDeviceCount(count,ierr) bind(c)
+    subroutine fudaGetDeviceCount(count,ierr)
       use iso_c_binding
       integer(c_int) :: count,ierr
     end subroutine
 
 !   void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ierr )
-    subroutine fudaGetDeviceProperties(prop,device,ierr) bind(c)
+    subroutine fudaGetDeviceProperties(prop,device,ierr)
       use iso_c_binding
       import cudaDeviceProp
       integer(c_int) :: device,ierr
@@ -35,13 +35,13 @@ module fudadevice
     end subroutine
 
 !   void fudasetdevice_( int *device, int *ierr )
-    subroutine fudaSetDevice(device,ierr) bind(c)
+    subroutine fudaSetDevice(device,ierr)
       use iso_c_binding
       integer(c_int) :: device,ierr
     end subroutine
 
 !   void fudasetdeviceflags_( unsigned int *ags, int *ierr )
-    subroutine fudaSetDeviceFlags(ags,ierr) bind(c)
+    subroutine fudaSetDeviceFlags(ags,ierr)
       use iso_c_binding
       integer(c_int) :: ags,ierr
     end subroutine
