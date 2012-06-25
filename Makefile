@@ -19,16 +19,16 @@ fuda_test: $(F_MOD) fuda_test.o
 	$(FC) -o fuda_test fuda_test.o $(LDFLAGS)
 
 .c.o:
-	@echo "\nC Object:" $@
+	@echo "C Object:" $@
 	$(CC) -c $(CFLAGS) $< -o $@
 
 .F.o:
-	@echo "\nF Object:" $@
+	@echo "F Object:" $@
 	$(CPP)
 	$(FC) $(FFLAGS) -c $*.f90 -o $@
 
 .F.mod:
-	@echo "\nF Module:" $@
+	@echo "F Module:" $@
 	$(CPP)
 	$(FC) $(FFLAGS) -c $*.f90
 
