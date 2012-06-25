@@ -11,3 +11,6 @@ fuda_test
 cudaerror.h
 cudadevice.h
 arch.make
+scr/*
+
+

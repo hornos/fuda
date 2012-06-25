@@ -6,7 +6,6 @@ import sys
 
 ### cufu
 include ${gdn}/lib
-import ${gbn}/header
 
 ### os detection
 _os=$(sys/os)
@@ -19,24 +18,42 @@ else
   exit ${_false_}
 fi
 
+### actions
+actions="cudaError_enum cudaDeviceProp"
+
 ### help
 function help/cufu() {
-  echo "CUDA to Fortran Converter"
+  cat << EOF
+
+CUDA to Fortran Converter
+
+Actions: $actions
+
+EOF
   exit ${_false_}
 }
 
 ### args
-while getopts h o; do
+_pgi=false
+while getopts hp o; do
   case "$o" in
+    p) _pgi=true;;
     h|*) help/cufu;;
   esac
 done
 
 ### main
+_pre="header"
+if ! ${_pgi} ; then
+  _pre="${_pre}/isoc"
+fi
+
+import ${gbn}/${_pre}
+
 msg "CUDA 2 FORTRAN"
 gui/line
-action="header/cudaError_enum header/cudaDeviceProp"
-for i in ${action} ; do
+for i in ${actions} ; do
   msg "Action: ${i}"
-  cufu/${i}
+
+  cufu/${_pre}/${i}
 done

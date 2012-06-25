@@ -1,3 +1,4 @@
+/* obsolete */
 #ifdef __GFORTRAN__
 #define KIND_INT_PTR 8
 #else

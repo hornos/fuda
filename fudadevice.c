@@ -89,4 +89,3 @@ void fudasetvaliddevices_( int *device_arr, int *len, int *ierr ) {
 #endif
   *ierr = cudaSetValidDevices( device_arr, *len );
 }
-

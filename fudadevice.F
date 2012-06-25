@@ -1,52 +1,56 @@
-#include "fudakind.h"
+! fudadevice.c wrapper
 
 module fudadevice
-  implicit none
+  use iso_c_binding
 
-#include "cudadevice.h"
+  include "cudadevice.h"
 
   interface
 !   void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ierr )
-    subroutine fudaChooseDevice(device,prop,ierr)
+    subroutine fudaChooseDevice(device,prop,ierr) bind(c)
+      use iso_c_binding
       import cudaDeviceProp
-      integer(kind=KIND_INT) :: device,ierr
+       integer(c_int) :: device,ierr
       type(cudaDeviceProp)   :: prop
     end subroutine
 
 !   void fudagetdevice_( int *device, int *ierr )
-    subroutine fudaGetDevice(device,ierr)
-      integer(kind=KIND_INT) :: device,ierr
+    subroutine fudaGetDevice(device,ierr) bind(c)
+      use iso_c_binding
+      integer(c_int) :: device,ierr
     end subroutine
 
 !   void fudagetdevicecount_( int *count, int *ierr )
-    subroutine fudaGetDeviceCount(count,ierr)
-      integer(kind=KIND_INT) :: count,ierr
+    subroutine fudaGetDeviceCount(count,ierr) bind(c)
+      use iso_c_binding
+      integer(c_int) :: count,ierr
     end subroutine
 
 !   void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ierr )
-    subroutine fudaGetDeviceProperties(prop,device,ierr)
+    subroutine fudaGetDeviceProperties(prop,device,ierr) bind(c)
+      use iso_c_binding
       import cudaDeviceProp
-      integer(kind=KIND_INT) :: device
-      integer(kind=KIND_INT) :: ierr
+      integer(c_int) :: device,ierr
       type(cudaDeviceProp)   :: prop
     end subroutine
 
 !   void fudasetdevice_( int *device, int *ierr )
-    subroutine fudaSetDevice(device,ierr)
-      integer(kind=KIND_INT) :: device
-      integer(kind=KIND_INT) :: ierr
+    subroutine fudaSetDevice(device,ierr) bind(c)
+      use iso_c_binding
+      integer(c_int) :: device,ierr
     end subroutine
 
 !   void fudasetdeviceflags_( unsigned int *ags, int *ierr )
-    subroutine fudaSetDeviceFlags(ags,ierr)
-      integer(kind=KIND_INT) :: ags
-      integer(kind=KIND_INT) :: ierr
+    subroutine fudaSetDeviceFlags(ags,ierr) bind(c)
+      use iso_c_binding
+      integer(c_int) :: ags,ierr
     end subroutine
 
 !   void fudasetvaliddevices_( int *device_arr, int *len, int *ierr )
     subroutine fudaSetValidDevices(device_arr,len,ierr)
-      integer(kind=KIND_INT),dimension(:) :: device_arr
-      integer(kind=KIND_INT) :: len, ierr
+      use iso_c_binding
+      integer(c_int),dimension(:) :: device_arr
+      integer(c_int) :: len,ierr
     end subroutine
 
   end interface
