@@ -5,7 +5,7 @@ program fuda_test
   implicit none
   integer :: count,ierr,i
   integer :: device
-  character(len=80) :: error
+  character(len=128) :: error = ''
   character(len=512) :: fmt_prop
   type(cudaDeviceProp) :: prop
   print*,"Fortran Cuda Wrapper"

@@ -7,7 +7,7 @@ module fudadevice
 
   interface
 !   void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ierr )
-    subroutine fudaChooseDevice(device,prop,ierr)
+    subroutine fudaChooseDevice(device,prop,ierr) bind(c,name='fudaChooseDevice')
       use iso_c_binding
       import cudaDeviceProp
        integer(c_int) :: device,ierr
@@ -15,7 +15,7 @@ module fudadevice
     end subroutine
 
 !   void fudagetdevice_( int *device, int *ierr )
-    subroutine fudaGetDevice(device,ierr)
+    subroutine fudaGetDevice(device,ierr) bind(c,name='fudaGetDevice')
       use iso_c_binding
       integer(c_int) :: device,ierr
     end subroutine

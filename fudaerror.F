@@ -7,7 +7,7 @@ module fudaerror
 !   void fudageterrorstring_( char *buf, int *ierr )
     subroutine fudaGetErrorString(buf,ierr)
       use iso_c_binding
-      integer(c_int),intent(in) :: ierr
+      integer(c_int) :: ierr
       character(*,c_char),intent(out) :: buf
     end subroutine
 

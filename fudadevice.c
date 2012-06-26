@@ -11,7 +11,7 @@
 // cudaError_t cudaChooseDevice (int device, const struct cudaDeviceProp *prop)
 // Select compute-device which best matches criteria.
 extern cudaError_t cudaChooseDevice ( int *, const struct cudaDeviceProp * );
-void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ierr ) {
+void fudaChooseDevice( int *device, const struct cudaDeviceProp *prop, int *ierr ) {
   *ierr = cudaChooseDevice( device, prop );
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );
@@ -22,7 +22,7 @@ void fudachoosedevice_( int *device, const struct cudaDeviceProp *prop, int *ier
 // cudaError_t cudaGetDevice (int *device)
 // Returns which device is currently being used.
 extern cudaError_t cudaGetDevice ( int * );
-void fudagetdevice_( int *device, int *ierr ) {
+void fudaGetDevice( int *device, int *ierr ) {
   *ierr = cudaGetDevice( device );
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );

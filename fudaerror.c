@@ -9,7 +9,8 @@
 // Returns the message string from an error code.
 extern const char *cudaGetErrorString (cudaError_t);
 void fudageterrorstring_( char *buf, int *ierr ) {
-  strcpy( buf, cudaGetErrorString(*ierr));
+  char *err=cudaGetErrorString(*ierr);
+  strcpy(buf, err);
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
 #endif
@@ -34,4 +35,3 @@ void fudapeekatlasterror( int *ierr ) {
   printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
 #endif
 }
-
