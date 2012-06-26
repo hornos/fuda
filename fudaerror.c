@@ -9,7 +9,7 @@
 // Returns the message string from an error code.
 extern const char *cudaGetErrorString (cudaError_t);
 void fudageterrorstring_( char *buf, int *ierr ) {
-  char *err=cudaGetErrorString(*ierr);
+  const char *err=cudaGetErrorString(*ierr);
   strcpy(buf, err);
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
@@ -19,7 +19,7 @@ void fudageterrorstring_( char *buf, int *ierr ) {
 // cudaError_t cudaGetLastError (void)
 // Returns the last error from a runtime call.
 extern cudaError_t cudaGetLastError ( void );
-void fudagetlasterror_( int *ierr ) {
+void fudaGetLastError_( int *ierr ) {
   *ierr = cudaGetLastError();
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );
@@ -29,7 +29,7 @@ void fudagetlasterror_( int *ierr ) {
 // cudaError_t cudaPeekAtLastError (void)
 // Returns the last error from a runtime call.
 extern cudaError_t cudaPeekAtLastError (void);
-void fudapeekatlasterror( int *ierr ) {
+void fudaPeekAtLastError( int *ierr ) {
   *ierr = cudaPeekAtLastError();
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ierr   = %d\n", __FILE__, __LINE__, *ierr );

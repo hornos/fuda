@@ -12,13 +12,15 @@ module fudaerror
     end subroutine
 
 !   void fudagetlasterror_( int *ierr )
-    subroutine fudaGetLastError(ierr)
+    subroutine fudaGetLastError(ierr) &
+               bind(c,name='fudaGetLastError')
       use iso_c_binding
       integer(c_int),intent(out) :: ierr
     end subroutine
 
 !   void fudapeekatlasterror_( int *ierr )
-    subroutine fudaPeekAtLastError(ierr)
+    subroutine fudaPeekAtLastError(ierr) &
+               bind(c,name='fudaPeekAtLastError')
       use iso_c_binding
       integer(c_int),intent(out) :: ierr
     end subroutine

@@ -34,7 +34,7 @@ void fudaGetDevice( int *device, int *ierr ) {
 // cudaError_t cudaGetDeviceCount (int *count)
 // Returns the number of compute-capable devices.
 extern cudaError_t cudaGetDeviceCount ( int * );
-void fudagetdevicecount_( int *count, int *ierr ) {
+void fudaGetDeviceCount( int *count, int *ierr ) {
   *ierr = cudaGetDeviceCount( count );
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) count = %d", __FILE__, __LINE__, *count );
@@ -45,7 +45,7 @@ void fudagetdevicecount_( int *count, int *ierr ) {
 // cudaError_t cudaGetDeviceProperties (struct cudaDeviceProp *prop, int device)
 // Returns information about the compute-device.
 extern cudaError_t cudaGetDeviceProperties (struct cudaDeviceProp *, int);
-void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ierr ) {
+void fudaGetDeviceProperties( struct cudaDeviceProp *prop, int *device, int *ierr ) {
   *ierr = cudaGetDeviceProperties( prop, *device );
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );
@@ -56,7 +56,7 @@ void fudagetdeviceproperties_( struct cudaDeviceProp *prop, int *device, int *ie
 // cudaError_t cudaSetDevice (int device)
 // Set device to be used for GPU executions.
 extern cudaError_t cudaSetDevice (int);
-void fudasetdevice_( int *device, int *ierr ) {
+void fudaSetDevice( int *device, int *ierr ) {
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) device = %d", __FILE__, __LINE__, *device );
 #endif
@@ -67,7 +67,7 @@ void fudasetdevice_( int *device, int *ierr ) {
 // cudaError_t cudaSetDeviceFlags (unsigned int ags)
 // Sets ags to be used for device executions.
 extern cudaError_t cudaSetDeviceFlags (unsigned int);
-void fudasetdeviceflags_( unsigned int *ags, int *ierr ) {
+void fudaSetDeviceFlags( unsigned int *ags, int *ierr ) {
 #ifdef FUDA_DEBUG
   printf("\n%s (%d) ags = %d", __FILE__, __LINE__, *ags );
 #endif
@@ -78,10 +78,10 @@ void fudasetdeviceflags_( unsigned int *ags, int *ierr ) {
 // cudaError_t cudaSetValidDevices (int *device_arr, int len)
 // Set a list of devices that can be used for CUDA
 extern cudaError_t cudaSetValidDevices (int *, int);
-void fudasetvaliddevices_( int *device_arr, int *len, int *ierr ) {
+void fudaSetValidDevices( int *device_arr, int *len, int *ierr ) {
 #ifdef FUDA_DEBUG
   int i;
-  printf("\n%s (%d) len = %d", __FILE__, __LINE__, len );
+  printf("\n%s (%d) len = %d", __FILE__, __LINE__, *len );
   printf("\n%s (%d) device_arr =", __FILE__, __LINE__ );
   for( i = 0; i < *len; i++ ) {
     printf( " %d", device_arr[i] );

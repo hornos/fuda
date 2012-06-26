@@ -10,7 +10,6 @@ program fuda_test
   type(cudaDeviceProp) :: prop
   print*,"Fortran Cuda Wrapper"
 
-! TODO: strings
   call fudaGetDeviceCount(count,ierr)
   if (ierr.ne.CUDA_SUCCESS) then
     call fudaGetErrorString(error,ierr)
@@ -23,6 +22,7 @@ program fuda_test
    /'  id: ',I3,2X,'name: ',A &
    /'  regsPerBlock: ',I5,2X,'warpSize: ',I5 &
    /'  maxThreadsPerBlock: ',I5,2X,'maxThreadsDim: ',3I5 &
+   /'  pciBusID: ',I5,2X,'pciDeviceID: ',I5,2X,'pciDomainID: ',I5 &
  /)"
 
   do device=0,count-1
@@ -32,10 +32,10 @@ program fuda_test
       print*,error
       stop
     end if
-!    print '(I3,X,A)',device,prop%name
     print(fmt_prop),device,prop%name,&
                     prop%regsPerBlock,prop%warpSize,&
-                    prop%maxThreadsPerBlock,(prop%maxThreadsDim(i),i=1,3)
+                    prop%maxThreadsPerBlock,(prop%maxThreadsDim(i),i=1,3),&
+                    prop%pciBusID,prop%pciDeviceID,prop%pciDomainID
   end do
 
 end program fuda_test
